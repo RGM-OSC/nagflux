@@ -18,7 +18,7 @@
     # leave empty for stdout
     LogFile = "/srv/eyesofnetwork/nagflux//var/log/nagflux.log"
     # List of Severities https://godoc.org/github.com/kdar/factorlog#Severity
-    MinSeverity = "DEBUG"
+    MinSeverity = "WARN"
 
 [Monitoring]
     # leave empty to disable

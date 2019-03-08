@@ -49,12 +49,15 @@ install -p -D -m 644 %SOURCE2 %buildroot%_unitdir/%name.service
 %post
 %post_service %name
 systemctl restart nagflux
+ln -s /srv/rgm/naglux-%{version} /srv/rgm/nagflux
 
 %preun
+rm -f /srv/rgm/nagflux
 
 %files
 %_unitdir/%name.service
-%dir %attr(0770, root, %name) /srv/rgm/nagflux-%{version}/
+%dir %attr(0770, root, root) /srv/rgm/nagflux-%{version}/
+%dir %attr(0770, nagios, rgm) /srv/rgm/nagflux-%{version}/var/*
 /srv/rgm/%{name}-%{version}/*
 
 %changelog

@@ -1,10 +1,10 @@
 [main]
-    NagiosSpoolfileFolder = "/srv/eyesofnetwork/nagflux/var/spool/"
+    NagiosSpoolfileFolder = "/srv/rgm/nagflux/var/spool/"
     NagiosSpoolfileWorker = 1
     InfluxWorker = 2
     MaxInfluxWorker = 5
     DumpFile = "nagflux.dump"
-    NagfluxSpoolfileFolder = "/srv/eyesofnetwork/nagflux//var/spool/nagflux"
+    NagfluxSpoolfileFolder = "/srv/rgm/nagflux/var/spool/nagflux"
     FieldSeparator = "&"
     BufferSize = 10000
     FileBufferSize = 65536
@@ -16,7 +16,7 @@
 
 [Log]
     # leave empty for stdout
-    LogFile = "/srv/eyesofnetwork/nagflux//var/log/nagflux.log"
+    LogFile = "/var/log/nagflux.log"
     # List of Severities https://godoc.org/github.com/kdar/factorlog#Severity
     MinSeverity = "WARN"
 
@@ -30,7 +30,7 @@
     Type = "file"
     # tcp: 127.0.0.1:6557 or file /var/run/live
     #Address = "127.0.0.1:6557"
-    Address = "/srv/eyesofnetwork/nagios/var/log/rw/live"
+    Address = "/srv/rgm/nagios/var/log/rw/live"
     # The amount to minutes to wait for livestatus to come up, if set to 0 the detection is disabled
     MinutesToWait = 2
     # Set the Version of Livestatus. Allowed are Nagios, Icinga2, Naemon.

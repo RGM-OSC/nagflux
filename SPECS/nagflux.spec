@@ -34,9 +34,9 @@ go build github.com/griesbacher/nagflux
 
 %install
 # Setup directories
-install -d -m 755 %{buildroot}%{rgm_path}/%name-%version/var
-#install -d -m 770 %{buildroot}%{rgm_path}/%name-%version/var/log
-install -d -m 775 %{buildroot}%{rgm_path}/%name-%version/var/spool
+install -d -m 0755 %{buildroot}%{rgm_path}/%name-%version/var
+#install -d -m 0770 %{buildroot}%{rgm_path}/%name-%version/var/log
+install -d -m 0770 %{buildroot}%{rgm_path}/%name-%version/var/spool
 # Install Files
 install -p -D -m 640 %SOURCE1 %buildroot%{rgm_path}/%name-%version/
 install -p -D -m 750 %{name} %buildroot%{rgm_path}/%name-%version/
@@ -57,7 +57,7 @@ rm -f %{rgm_path}/%{name}
 
 %files
 %_unitdir/%name.service
-%dir %attr(0770, root, root) %{rgm_path}/%{name}-%{version}/
+%dir %attr(0775, root, root) %{rgm_path}/%{name}-%{version}/
 %dir %attr(0770, %{rgm_user_nagios}, %{rgm_group}) %{rgm_path}/%{name}-%{version}/var/*
 %{rgm_path}/%{name}-%{version}/*
 

@@ -6,7 +6,7 @@ After=network-online.target
 [Service]
 User=root
 Group=root
-ExecStart=/opt/nagflux/nagflux -configPath /opt/nagflux/config.gcfg
+ExecStart=/srv/rgm/nagflux/nagflux -configPath /srv/rgm/nagflux/config.gcfg
 Restart=on-failure
 
 [Install]

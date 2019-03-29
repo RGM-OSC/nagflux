@@ -3,7 +3,7 @@
     NagiosSpoolfileWorker = 1
     InfluxWorker = 2
     MaxInfluxWorker = 5
-    DumpFile = "nagflux.dump"
+    DumpFile = "/var/log/nagflux.dump"
     NagfluxSpoolfileFolder = "/srv/rgm/nagflux/var/spool/nagflux"
     FieldSeparator = "&"
     BufferSize = 10000

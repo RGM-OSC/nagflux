@@ -9,7 +9,7 @@ Group:          Development/Other
 License:        MIT
 URL:            https://github.com/Griesbacher/nagflux
 
-Source0:        %{name}-%{version}.tar.gz
+Source0:        %{name}.tar.gz
 Source1:        config.gcfg
 Source2:        nagflux.service
 

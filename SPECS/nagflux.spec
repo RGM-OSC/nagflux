@@ -25,7 +25,7 @@ This data is sent to an InfluxDB, to get displayed by Grafana.
 Therefor is the tool Histou gives you the possibility to add Templates to Grafana.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 go get -u github.com/griesbacher/nagflux

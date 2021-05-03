@@ -9,7 +9,7 @@ Group:          Development/Other
 License:        MIT
 URL:            https://github.com/Griesbacher/nagflux
 
-Source0:        %{name}-%{version}.tar.gz
+Source0:        %{name}.tar.gz
 Source1:        config.gcfg
 Source2:        nagflux.service
 
@@ -25,7 +25,7 @@ This data is sent to an InfluxDB, to get displayed by Grafana.
 Therefor is the tool Histou gives you the possibility to add Templates to Grafana.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 go get -u github.com/griesbacher/nagflux

@@ -15,7 +15,6 @@ Source2:        nagflux.service
 
 ExclusiveArch: x86_64
 BuildRequires: golang
-BuildRequires: xmlto asciidoc
 BuildRequires: rpm-macros-rgm
 
 %description
@@ -28,9 +27,10 @@ Therefor is the tool Histou gives you the possibility to add Templates to Grafan
 %setup -q -n %{name}
 
 %build
-go get -u github.com/griesbacher/nagflux
+go mod init github.com/griesbacher/nagflux
+go mod tidy
+go mod vendor
 go build github.com/griesbacher/nagflux
-
 
 %install
 # Setup directories

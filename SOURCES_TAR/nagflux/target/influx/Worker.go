@@ -125,8 +125,8 @@ func (worker Worker) sendBuffer(queries []collector.Printable) {
 	}
 
 	var lineQueries []string
-	for i, query := range queries {
-		cast, castErr := worker.castJobToString(query, i)
+	for _, query := range queries {
+		cast, castErr := worker.castJobToString(query)
 		if castErr == nil {
 			lineQueries = append(lineQueries, cast)
 		}
@@ -192,7 +192,7 @@ func (worker Worker) readQueriesFromQueue() []string {
 		select {
 		case query = <-worker.jobs:
 			if query.TestTargetFilter(worker.target.Name) {
-				cast, err := worker.castJobToString(query, 0)
+				cast, err := worker.castJobToString(query)
 				if err == nil {
 					queries = append(queries, cast)
 				}
@@ -305,12 +305,12 @@ func (worker Worker) dumpQueries(filename string, queries []string) {
 }
 
 //Converts an collector.Printable to a string.
-func (worker Worker) castJobToString(job collector.Printable, i int) (string, error) {
+func (worker Worker) castJobToString(job collector.Printable) (string, error) {
 	var result string
 	var err error
 
 	if helper.VersionOrdinal(worker.version) >= helper.VersionOrdinal("0.9") {
-		result = job.PrintForInfluxDB(worker.version, i)
+		result = job.PrintForInfluxDB(worker.version)
 	} else {
 		worker.log.Fatalf("This influxversion [%s] given in the config is not supported", worker.version)
 		err = errors.New("This influxversion given in the config is not supported")

@@ -21,7 +21,7 @@ type PerformanceData struct {
 }
 
 //PrintForInfluxDB prints the data in influxdb lineformat
-func (p PerformanceData) PrintForInfluxDB(version string, i int) string {
+func (p PerformanceData) PrintForInfluxDB(version string) string {
 	if helper.VersionOrdinal(version) >= helper.VersionOrdinal("0.9") {
 		tableName := fmt.Sprintf(`metrics,host=%s`, helper.SanitizeInfluxInput(p.Hostname))
 		if p.Service == "" {
@@ -29,25 +29,10 @@ func (p PerformanceData) PrintForInfluxDB(version string, i int) string {
 		} else {
 			tableName += fmt.Sprintf(`,service=%s`, helper.SanitizeInfluxInput(p.Service))
 		}
-		var fieldsString = ""
-		if config.GetConfig().InfluxDBGlobal.StorePerformanceLabelAsField {
-			tableName += fmt.Sprintf(`,performanceLabelIndex=%d`,
-				i,
-			)
-		}
-
-		tableName += fmt.Sprintf(`,command=%s`,
+		tableName += fmt.Sprintf(`,command=%s,performanceLabel=%s`,
 			helper.SanitizeInfluxInput(p.Command),
+			helper.SanitizeInfluxInput(p.PerformanceLabel),
 		)
-		if config.GetConfig().InfluxDBGlobal.StorePerformanceLabelAsField {
-			fieldsString += fmt.Sprintf(`,performanceLabel="%s"`,
-				helper.SanitizeInfluxField(p.PerformanceLabel),
-			)
-		} else {
-			tableName += fmt.Sprintf(`,performanceLabel=%s`,
-				helper.SanitizeInfluxInput(p.PerformanceLabel),
-			)
-		}
 		if len(p.Tags) > 0 {
 			tableName += fmt.Sprintf(`,%s`, helper.PrintMapAsString(helper.SanitizeMap(p.Tags), ",", "="))
 		}
@@ -56,7 +41,6 @@ func (p PerformanceData) PrintForInfluxDB(version string, i int) string {
 		}
 
 		tableName += fmt.Sprintf(` %s`, helper.PrintMapAsString(helper.SanitizeMap(p.Fields), ",", "="))
-		tableName += fieldsString
 		tableName += fmt.Sprintf(" %s\n", p.Time)
 		return tableName
 	}

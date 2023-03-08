@@ -1,2 +1,6 @@
 .vscode
 .vstags
+SOURCES_TAR/nagflux/vendor
+SOURCES_TAR/nagflux/go.mod
+SOURCES_TAR/nagflux/go.sum
+
